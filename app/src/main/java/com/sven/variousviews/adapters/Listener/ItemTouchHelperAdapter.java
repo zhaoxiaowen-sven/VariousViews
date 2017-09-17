@@ -1,4 +1,4 @@
-package com.sven.variousviews.interfaces;
+package com.sven.variousviews.adapters.Listener;
 
 
 public interface ItemTouchHelperAdapter {

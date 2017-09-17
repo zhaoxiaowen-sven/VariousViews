@@ -76,6 +76,7 @@ public class ListAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Log.i(TAG, "onClick: convertView clicked" + position);
+                    Toast.makeText(mContext, "convertView clicked" + position, Toast.LENGTH_SHORT).show();
                 }
             });
             

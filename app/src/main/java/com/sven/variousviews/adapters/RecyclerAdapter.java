@@ -2,13 +2,9 @@ package com.sven.variousviews.adapters;
 
 
 import android.content.Context;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,8 +13,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sven.variousviews.R;
+import com.sven.variousviews.adapters.Listener.RecyclerItemClickListener;
 import com.sven.variousviews.bean.FruitBean;
-import com.sven.variousviews.interfaces.ItemTouchHelperAdapter;
+import com.sven.variousviews.adapters.Listener.ItemTouchHelperAdapter;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,6 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.bt_download.setText("recycler");
 
         if (mItemListener != null) {
+            Log.i(TAG, "onBindViewHolder: here");
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,13 +106,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         notifyItemRemoved(position);
     }
 
-    public interface RecyclerItemClickListener {
-
-        void onItemClickListener(View view, int position);
-
-        void onItemLongClickListener(View view, int position);
-
-    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -131,48 +122,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             bt_download = (Button) itemView.findViewById(R.id.bt_download);
         }
     }
-
-    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
-        private View childView;
-        private RecyclerView touchView;
-        private GestureDetector mGestureDetector;
-
-        public RecyclerTouchListener(Context context, final RecyclerItemClickListener listener){
-            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener(){
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    if (childView != null && listener != null) {
-                        listener.onItemClickListener(childView, touchView.getChildLayoutPosition(childView));
-                    }
-                    return true;
-                }
-
-                @Override
-                public void onLongPress(MotionEvent e) {
-                    if (childView != null && listener != null) {
-                        listener.onItemLongClickListener(childView, touchView.getChildLayoutPosition(childView));
-                    }
-                }
-            });
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            mGestureDetector.onTouchEvent(e);
-            childView = rv.findChildViewUnder(e.getX(), e.getY());
-            touchView = rv;
-            return false;
-        }
-
-        @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        }
-
-        @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-        }
-    }
-
 }

@@ -11,12 +11,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.View;
 
 import com.sven.variousviews.R;
 import com.sven.variousviews.Utils;
+import com.sven.variousviews.adapters.Listener.RecyclerTouchListener;
+import com.sven.variousviews.adapters.Listener.SimpleItemTouchHelperCallback;
 import com.sven.variousviews.adapters.RecyclerAdapter;
-import com.sven.variousviews.interfaces.ItemTouchHelperAdapter;
 
 public class RecyclerActivity extends AppCompatActivity {
 
@@ -27,11 +27,11 @@ public class RecyclerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
 //        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 //        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         final RecyclerAdapter adapter = new RecyclerAdapter(Utils.initData(), this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -50,18 +50,17 @@ public class RecyclerActivity extends AppCompatActivity {
 //        });
 
 //      2.item监听方式2
-        recyclerView.addOnItemTouchListener(new RecyclerAdapter.RecyclerTouchListener(this,
-                new RecyclerAdapter.RecyclerItemClickListener() {
-                    @Override
-                    public void onItemClickListener(View view, int position) {
-                        Log.i(TAG, "onItemClickListener: " + view.getId()+" "+position);
-                    }
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this) {
+            @Override
+            public void onItemClickListener(RecyclerView.ViewHolder viewHolder) {
+                Log.i(TAG, "addOnItemTouchListener: onItemClickListener");
+            }
 
-                    @Override
-                    public void onItemLongClickListener(View view, int position) {
-                        Log.i(TAG, "onItemLongClickListener: " + view.getId()+" "+position);
-                    }
-                }));
+            @Override
+            public void onItemLongClickListener(RecyclerView.ViewHolder viewHolder) {
+                Log.i(TAG, "addOnItemTouchListener: onItemLongClickListener");
+            }
+        });
 
 //        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
@@ -108,39 +107,3 @@ public class RecyclerActivity extends AppCompatActivity {
     }
 }
 
-class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
-
-    private ItemTouchHelperAdapter mAdapter;
-
-    public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter){
-        mAdapter = adapter;
-    }
-
-    @Override
-    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        int swipeFlags = ItemTouchHelper.LEFT;
-        return makeMovementFlags(dragFlags,swipeFlags);
-    }
-
-    @Override
-    public boolean isLongPressDragEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-        mAdapter.onItemMove(viewHolder.getAdapterPosition(),target.getAdapterPosition());
-        return true;
-    }
-
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        mAdapter.onItemDismiss(viewHolder.getAdapterPosition());
-    }
-}
