@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VariousViews</string>
+    <string name="list">listview</string>
+    <string name="recycler">recyclerView</string>
+    <string name="grid">gridView</string>
+    <string name="gallery">galleryView</string>
+    <string name="viewPager">viewPager</string>
+</resources>
