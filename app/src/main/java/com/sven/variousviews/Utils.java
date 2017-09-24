@@ -29,7 +29,11 @@ public class Utils {
         ArrayList<FruitBean> fruitBeanLists = new ArrayList<>();
         int len = data.length > ImageUrls.imageUrls.length ? ImageUrls.imageUrls.length : data.length;
         for(int i = 0; i<len; i++){
-            fruitBeanLists.add(new FruitBean(getRandomLenName(data[i]), i+"",ImageUrls.imageUrls[i]));
+//            if (i % 2 ==0){
+                fruitBeanLists.add(new FruitBean(data[i], i+"", null, 0));
+//            }else {
+                fruitBeanLists.add(new FruitBean(data[i], i+"", ImageUrls.imageUrls[i], 1));
+//            }
         }
 
 

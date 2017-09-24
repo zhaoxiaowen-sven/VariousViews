@@ -28,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         listView = (ListView) findViewById(R.id.list_view);
-        ListAdapter adapter = new ListAdapter(ListActivity.this, Utils.initData());
+        ListAdapter adapter = new ListAdapter(ListActivity.this, Utils.initData2());
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -57,8 +57,8 @@ public class ListActivity extends AppCompatActivity {
 
             }
         });
-        listView.addHeaderView(headerView, null, false);
-        listView.addFooterView(footerView);
+//        listView.addHeaderView(headerView, null, false);
+//        listView.addFooterView(footerView);
 
         listView.setAdapter(adapter);
 

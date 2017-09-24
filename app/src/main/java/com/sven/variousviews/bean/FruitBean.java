@@ -17,6 +17,23 @@ public class FruitBean {
 
     private String url;
 
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public FruitBean(String name, String id, String url, int type) {
+        this.name = name;
+        this.id = id;
+        this.url = url;
+        this.type = type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public FruitBean(String name, String id, String url) {
         this.name = name;
         this.id = id;
