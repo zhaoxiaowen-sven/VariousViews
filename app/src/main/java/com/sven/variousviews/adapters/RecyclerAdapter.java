@@ -49,9 +49,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Log.i(TAG, "onBindViewHolder: ");
         FruitBean fruitBean = mFruitBeanList.get(position);
-        Log.i(TAG, "onBindViewHolder: " + isLoadImage);
         if (isLoadImage) {
             Glide.with(mContext).load(fruitBean.getUrl()).into(holder.iv_pic);
         }

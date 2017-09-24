@@ -48,6 +48,13 @@ public class RecyclerActivity extends AppCompatActivity {
 //                Log.i(TAG, "onItemLongClickListener: RecyclerItemClickListener");
 //            }
 //        });
+//        设置滑动删除
+        //先实例化Callback
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        //用Callback构造ItemtouchHelper
+        final ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        //调用ItemTouchHelper的attachToRecyclerView方法建立联系
+        touchHelper.attachToRecyclerView(recyclerView);
 
 //      2.item监听方式2
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this) {
@@ -59,50 +66,15 @@ public class RecyclerActivity extends AppCompatActivity {
             @Override
             public void onItemLongClickListener(RecyclerView.ViewHolder viewHolder) {
                 Log.i(TAG, "addOnItemTouchListener: onItemLongClickListener");
+                if (viewHolder.getLayoutPosition() != 0) {
+                    touchHelper.startDrag(viewHolder);
+                }
             }
         });
 
-//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                Log.i(TAG, "onScrollStateChanged: " + newState);
-//                switch (newState) {
-//                    case SCROLL_STATE_IDLE:
-//                        adapter.setLoadImage(true);
-//                        break;
-//                    case SCROLL_STATE_TOUCH_SCROLL:
-//                    case SCROLL_STATE_FLING:
-//                        adapter.setLoadImage(false);
-//                        break;
-//                }
-//            }
-//        });
-        // 事件监听2
-//        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//
-//            }
-//        });
         recyclerView.setAdapter(adapter);
 
-//        设置滑动删除
-        //先实例化Callback
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
-        //用Callback构造ItemtouchHelper
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        //调用ItemTouchHelper的attachToRecyclerView方法建立联系
-        touchHelper.attachToRecyclerView(recyclerView);
+
 
     }
 }
