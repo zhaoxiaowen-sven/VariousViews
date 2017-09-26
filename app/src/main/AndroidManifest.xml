@@ -21,9 +21,10 @@
         <activity android:name=".activities.ListActivity">
             >
         </activity>
-        <activity android:name=".activities.RecyclerActivity"></activity>
+        <activity android:name=".activities.RecyclerActivity" />
         <activity android:name=".activities.GridActivity" />
-        <activity android:name=".activities.VpActivity"></activity>
+        <activity android:name=".activities.VpActivity" />
+        <activity android:name=".activities.WebActivity"></activity>
     </application>
 
 </manifest>

@@ -5,4 +5,5 @@
     <string name="grid">gridView</string>
     <string name="gallery">galleryView</string>
     <string name="viewPager">viewPager</string>
+    <string name="webView">webView</string>
 </resources>
