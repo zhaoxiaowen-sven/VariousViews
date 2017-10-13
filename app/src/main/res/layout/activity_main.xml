@@ -57,4 +57,11 @@
         android:layout_below="@+id/bt_4"
         android:onClick="onClick"
         android:text="@string/webView" />
+
+    <ImageView android:id="@+id/animationIV"
+        android:layout_below="@+id/bt_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5px"
+        android:src="@drawable/anim"/>
 </RelativeLayout>

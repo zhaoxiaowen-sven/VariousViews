@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.sven.variousviews.activities.WebActivity">
+    <Button
+        android:id="@+id/bt_alert"
+        android:text="弹框"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <!-- 获取网站的标题-->
     <TextView
         android:id="@+id/web_title"

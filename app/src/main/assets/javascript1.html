@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carson</title>
+    <script>
+
+        // Android需要调用的方法
+        function callJS(){
+            alert("Android调用了JS的callJS方法");
+        }
+
+        function callAndroid(){
+           // 由于对象映射，所以调用test对象等于调用Android映射的对象
+            test.hello("js调用了android中的hello方法");
+        }
+
+        function callAndroid2(){
+            <!--/*约定的url协议为：js://webview?arg1=111&arg2=222*/-->
+            document.location = "js://webview?arg1=111&arg2=222";
+         }
+
+        function clickPrompt(){
+           <!--调用prompt（）-->
+            var result=prompt("js://demo?arg1=111&arg2=222");
+            prompt("demo " + result);
+        }
+      </script>
+</head>
+<body>
+
+<button type="button" id="button1" title="按钮1" onclick="callAndroid()"></button>
+
+<button type="button" id="button2" title="按钮2" onclick="callAndroid2()"></button>
+
+<button type="button" id="button3" title="按钮3" onclick="clickPrompt()"></button>
+</body>
+</html>
