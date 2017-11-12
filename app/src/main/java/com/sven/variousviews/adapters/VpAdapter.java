@@ -2,7 +2,6 @@ package com.sven.variousviews.adapters;
 
 
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,14 +10,14 @@ import java.util.List;
 public class VpAdapter extends PagerAdapter {
     private List<View> mPageList;
 
-    public VpAdapter(List<View> pageList){
+    public VpAdapter(List<View> pageList) {
         this.mPageList = pageList;
     }
 
     @Override
     public int getCount() {
 //        Log.i("VpActivity", "getCount: "+mPageList.size());
-        return mPageList.size();
+        return mPageList == null ? 0 : mPageList.size();
     }
 
     @Override

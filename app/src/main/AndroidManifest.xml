@@ -24,9 +24,10 @@
         <activity android:name=".activities.RecyclerActivity" />
         <activity android:name=".activities.GridActivity" />
         <activity android:name=".activities.VpActivity" />
-        <activity android:name=".activities.WebActivity"
-            android:configChanges="orientation">
-        </activity>
+        <activity
+            android:name=".activities.WebActivity"
+            android:configChanges="orientation"></activity>
+        <activity android:name=".activities.VpActivity2"></activity>
     </application>
 
 </manifest>

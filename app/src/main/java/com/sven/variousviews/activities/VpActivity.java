@@ -2,7 +2,6 @@ package com.sven.variousviews.activities;
 
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,8 +20,8 @@ import com.sven.variousviews.fragments.Fragment3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VpActivity extends FragmentActivity implements
-        ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener {
+public class VpActivity extends FragmentActivity /*implements
+        ViewPager.OnPageChangeListener, TabLayout.OnTabSelectedListener*/ {
 
     private static final String TAG = "VpActivity";
     private ViewPager mViewPager;
@@ -38,10 +37,10 @@ public class VpActivity extends FragmentActivity implements
         mViewPager = (ViewPager) findViewById(R.id.vp);
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         //注册监听
-        mViewPager.addOnPageChangeListener(this);
-        mTabLayout.addOnTabSelectedListener(this);
-//        initView();
-        initFragments();
+//        mViewPager.addOnPageChangeListener(this);
+//        mTabLayout.addOnTabSelectedListener(this);
+        initView();
+//        initFragments();
     }
 
     private void initFragments() {
@@ -66,35 +65,33 @@ public class VpActivity extends FragmentActivity implements
         mViewPager.setAdapter(new VpAdapter(pageList));
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        mTabLayout.getTabAt(position).select();
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        mViewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
-
-
+//    @Override
+//    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//    }
+//
+//    @Override
+//    public void onPageSelected(int position) {
+//        mTabLayout.getTabAt(position).select();
+//    }
+//
+//    @Override
+//    public void onPageScrollStateChanged(int state) {
+//
+//    }
+//
+//    @Override
+//    public void onTabSelected(TabLayout.Tab tab) {
+//        mViewPager.setCurrentItem(tab.getPosition());
+//    }
+//
+//    @Override
+//    public void onTabUnselected(TabLayout.Tab tab) {
+//
+//    }
+//
+//    @Override
+//    public void onTabReselected(TabLayout.Tab tab) {
+//
+//    }
 }
