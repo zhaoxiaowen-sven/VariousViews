@@ -1,10 +1,11 @@
 package com.sven.variousviews.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -26,12 +27,19 @@ public class VpActivity2 extends FragmentActivity {
     private ViewPager mViewPager;
     private PagerTabStrip mPagerTabStrip;
     private View view1, view2, view3;
+    private TabLayout mTabLayout;
+    List<String> titleList = new ArrayList<>();
+    List<Fragment> fragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        getSupportActionBar().hide();//隐藏掉整个ActionBar
         setContentView(R.layout.activity_vp2);
+        mTabLayout = (TabLayout) findViewById(R.id.tabLayout2);
         mViewPager = (ViewPager) findViewById(R.id.vp2);
+        initTitleList();
 //        mPagerTabStrip = (PagerTabStrip) findViewById(R.id.vp_strip);
 //        bindViews();
         bindFragments();
@@ -39,37 +47,29 @@ public class VpActivity2 extends FragmentActivity {
 
     // 实现方式2: viewPager + fragment
     private void bindFragments(){
-        List<Fragment> fragmentList = new ArrayList<>();
+        initFragments();
+        mViewPager.setAdapter(new FragPagerAdapter(getSupportFragmentManager(), fragmentList));
+        for (int i = 0; i < titleList.size(); i++){
+            mTabLayout.addTab(mTabLayout.newTab().setText(titleList.get(i)));
+        }
+//        mTabLayout.setupWithViewPager(mViewPager);
+// ???
+      mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+    }
+
+    private void initFragments() {
         fragmentList.add(new Fragment1());
         fragmentList.add(new Fragment2());
         fragmentList.add(new Fragment3());
-        mViewPager.setAdapter(new FragPagerAdapter(getSupportFragmentManager(), fragmentList));
     }
 
-    // 实现方式1：viewPager + views
-    private void bindViews() {
-        LayoutInflater layoutInflater = getLayoutInflater();
-        view1 = layoutInflater.inflate(R.layout.page1, null);
-        view2 = layoutInflater.inflate(R.layout.page2, null);
-        view3 = layoutInflater.inflate(R.layout.page3, null);
-
-        List<View> viewList = new ArrayList<>();
-        viewList = new ArrayList<>();
-        viewList.add(view1);
-        viewList.add(view2);
-        viewList.add(view3);
-
-        List<String> titleList = new ArrayList<>();
+    private void initTitleList(){
         titleList.add("title1");
         titleList.add("title2");
         titleList.add("title3");
-
-        mViewPager.setAdapter(new MyPagerAdapter(viewList, titleList));
-//        mPagerTabStrip.setTabIndicatorColor(Color.RED);
-//        mPagerTabStrip.
     }
 
-    class FragPagerAdapter extends FragmentPagerAdapter {
+    class FragPagerAdapter extends FragmentStatePagerAdapter {
         private List<Fragment> mFragmentList;
         public FragPagerAdapter(FragmentManager fm , List<Fragment> fragmentList){
             super(fm);
@@ -85,8 +85,30 @@ public class VpActivity2 extends FragmentActivity {
         public int getCount() {
             return mFragmentList.size();
         }
+
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            return titleList.get(position);
+//        }
     }
 
+    // 实现方式1：viewPager + views
+    private void bindViews() {
+        LayoutInflater layoutInflater = getLayoutInflater();
+        view1 = layoutInflater.inflate(R.layout.page1, null);
+        view2 = layoutInflater.inflate(R.layout.page2, null);
+        view3 = layoutInflater.inflate(R.layout.page3, null);
+
+        List<View> viewList = new ArrayList<>();
+        viewList = new ArrayList<>();
+        viewList.add(view1);
+        viewList.add(view2);
+        viewList.add(view3);
+        mViewPager.setAdapter(new MyPagerAdapter(viewList, titleList));
+//        mPagerTabStrip.setTabIndicatorColor(Color.RED);
+    }
+
+    /* viewpager + view*/
     class MyPagerAdapter extends PagerAdapter {
         private List<View> mViewList;
         private List<String> mTitleList;
@@ -97,7 +119,6 @@ public class VpActivity2 extends FragmentActivity {
 
         @Override
         public int getCount() {
-//            notifyDataSetChanged();
             return mViewList == null ? 0 : mViewList.size();
         }
 
@@ -108,7 +129,6 @@ public class VpActivity2 extends FragmentActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-//            return super.instantiateItem(container, position);
             container.addView(mViewList.get(position));
             return mViewList.get(position);
         }
@@ -120,7 +140,6 @@ public class VpActivity2 extends FragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-//            return super.getPageTitle(position);
             return mTitleList.get(position);
         }
     }

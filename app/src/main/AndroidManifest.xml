@@ -26,8 +26,8 @@
         <activity android:name=".activities.VpActivity" />
         <activity
             android:name=".activities.WebActivity"
-            android:configChanges="orientation"></activity>
-        <activity android:name=".activities.VpActivity2"></activity>
+            android:configChanges="orientation"/>
+        <activity android:name=".activities.VpActivity2"/>
     </application>
 
 </manifest>

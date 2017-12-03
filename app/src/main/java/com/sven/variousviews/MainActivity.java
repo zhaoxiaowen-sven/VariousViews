@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.sven.variousviews.activities.GridActivity;
 import com.sven.variousviews.activities.ListActivity;
 import com.sven.variousviews.activities.RecyclerActivity;
+import com.sven.variousviews.activities.VpActivity;
 import com.sven.variousviews.activities.VpActivity2;
 import com.sven.variousviews.activities.WebActivity;
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //                animationIV.setImageResource(R.drawable.anim);
 //                animationDrawable = (AnimationDrawable) animationIV.getDrawable();
 //                animationDrawable.start();
+                startActivity(new Intent(this, VpActivity.class));
                 break;
             case R.id.bt_4:
                 startActivity(new Intent(this, VpActivity2.class));
