@@ -39,8 +39,8 @@ public class VpActivity extends FragmentActivity implements
         //注册监听
         mViewPager.addOnPageChangeListener(this);
         mTabLayout.addOnTabSelectedListener(this);
-//        initView();
-        initFragments();
+        initView();
+//        initFragments();
     }
 
     private void initFragments() {
@@ -61,6 +61,7 @@ public class VpActivity extends FragmentActivity implements
         pageList.add(view1);
         pageList.add(view2);
         pageList.add(view3);
+
         Log.i(TAG, "initView: " + pageList.size());
         mViewPager.setAdapter(new VpAdapter(pageList));
     }
